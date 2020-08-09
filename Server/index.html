@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Input</h1>
+<h2>Numerical Features<h2>
+
+<form>
+  <label for="fname">Variable2:</label><br>
+  <input type="text" id="var2" name="fname">
+  <label for="lname">Variable3:</label>
+  <input type="text" id="var3" name="lname"><br>
+
+  <label for="fname">Variable8:</label><br>
+  <input type="text" id="var8" name="fname">
+  <label for="lname">Variable11:</label>
+  <input type="text" id="var11" name="lname"><br>
+
+  <label for="fname">Variable14:</label><br>
+  <input type="text" id="var14" name="fname">
+  <label for="lname">Variable15:</label>
+  <input type="text" id="var15" name="lname"><br>
+
+  <label for="fname">Variable17:</label><br>
+  <input type="text" id="var17" name="fname">
+  <label for="lname">Variable19:</label>
+  <input type="text" id="var19" name="lname"><br>
+</form>
+
+<h2> Categorial Features<h2>
+
+<label for="cars">Variable1</label>
+
+<select id="var1">
+  <option value="9">a</option>
+  <option value="8">b</option>
+</select>
+
+<label for="cars">Variable4</label>
+
+<select id="var4">
+  <option value="10">u</option>
+  <option value="11">y</option>
+  <option value="12">l</option>
+</select>
+<label for="cars">Variable5</label>
+
+<select id="var5">
+  <option value="13">g</option>
+  <option value="14">p</option>
+  <option value="15">gg</option>
+</select>
+<label for="cars">Variable6</label>
+
+<select id="var6">
+  <option value="16">c</option>
+  <option value="24">k</option>
+  <option value="26">ff</option>
+  <option value="22" selected>i</option>
+    <option value="28" >j</option>
+      <option value="17" >q</option>
+        <option value="18" >w</option>
+          <option value="27" >d</option>
+            <option value="23" >m</option>
+              <option value="19" >cc</option>
+                <option value="29" >r</option>
+                  <option value="20" >x</option>
+                    <option value="25" >e</option>
+                    <option value="21" >aa</option>
+</select>
+<br>
+
+<label for="cars">Variable7</label>
+
+<select id="var7">
+  <option value="30">v</option>
+  <option value="33">ff</option>
+  <option value="38">o</option>
+  <option value="31" >h</option>
+  <option value="35">j</option>
+  <option value="32">bb</option>
+  <option value="36">n</option>
+  <option value="34" selected>z</option>
+    <option value="37">dd</option>
+</select>
+
+<label for="cars">Variable9</label>
+
+<select id="var9">
+  <option value="40">f</option>
+  <option value="39">t</option>
+</select>
+<label for="cars">Variable10</label>
+
+<select id="var10">
+  <option value="41">t</option>
+  <option value="42">f</option>
+</select>
+<label for="cars">Variable12</label>
+
+<select id="var12">
+  <option value="44">t</option>
+  <option value="43">f</option>
+</select>
+<br>
+
+<label for="cars">Variable13</label>
+
+<select id="var13">
+  <option value="45">g</option>
+  <option value="46">s</option>
+  <option value="47">p</option>
+</select>
+<label for="cars">Variable18</label>
+<script>
+function Predict() {
+var Features = new Array(48);
+for (var i = 0; i < Features.length; i++) {
+  Features[i] = 0;
+}
+categorial = ["var1","var4","var5","var6","var7","var9","var10","var12","var13"]
+numerical = ["var2","var3","var8","var11","var14","var15","var17","var19"]
+
+for (var i = 0; i < categorial.length; i++) {
+  var e = document.getElementById(categorial[i]);
+var strUser = e.options[e.selectedIndex].value;
+Features[strUser] = 1
+}
+for (var i = 0; i < numerical.length; i++) {
+  var e = document.getElementById(numerical[i]);
+var strUser = e.value;
+ var index = Number(numerical[i].substring(3,numerical[i].length));
+console.log(index+ " "+strUser);
+Features[index] = strUser
+}
+}
+
+</script>
+
+<br><br><br>
+<button onclick="Predict()">Predict</button>
+<br><br><br>
+<h2>LABEL<h2>
+<p>
+This is where the user can enter text...
+</p>
+
+</body>
+</html>
