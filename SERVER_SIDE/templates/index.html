@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html>
+<title>widebot</title>
+
 <body>
 
-<h1>Input</h1>
-<h2>Numerical Features<h2>
+<h1>Enter The input</h1>
+<h2 style="color:#FF0000">Numerical Features<h2>
 
 <form>
-  <label for="fname">Variable2:</label><br>
-  <input type="text" id="var2" name="fname">
+  <label for="fname">Variable2:</label>
+  <input type="text" id="var2" name="fname"><br>
   <label for="lname">Variable3:</label>
   <input type="text" id="var3" name="lname"><br>
 
-  <label for="fname">Variable8:</label><br>
-  <input type="text" id="var8" name="fname">
+  <label for="fname">Variable8:</label>
+  <input type="text" id="var8" name="fname"><br>
   <label for="lname">Variable11:</label>
   <input type="text" id="var11" name="lname"><br>
 
-  <label for="fname">Variable14:</label><br>
-  <input type="text" id="var14" name="fname">
+  <label for="fname">Variable14:</label>
+  <input type="text" id="var14" name="fname"><br>
   <label for="lname">Variable15:</label>
   <input type="text" id="var15" name="lname"><br>
 
-  <label for="fname">Variable17:</label><br>
-  <input type="text" id="var17" name="fname">
+  <label for="fname">Variable17:</label>
+  <input type="text" id="var17" name="fname"><br>
   <label for="lname">Variable19:</label>
   <input type="text" id="var19" name="lname"><br>
 </form>
 
-<h2> Categorial Features<h2>
+<h2 style="color:#FF0000"> Categorial Features<h2>
 
 <label for="cars">Variable1</label>
 
@@ -111,7 +113,6 @@
   <option value="46">s</option>
   <option value="47">p</option>
 </select>
-<label for="cars">Variable18</label>
 <script>
 function Predict() {
 var Features = new Array(48);
@@ -136,12 +137,21 @@ Features[index] = strUser
 
 const Http = new XMLHttpRequest();
 
-const url='https://jsonplaceholder.typicode.com/posts';
-Http.open("GET", url);
+var base='https://widebot-bcp.herokuapp.com/predict?';
+for (var i = 0; i <Features.length; i++) {
+  if(i == Features.length-1){
+    base+=("p"+(i+1).toString()+"="+Features[i].toString());
+  }else{
+  base+=("p"+(i+1).toString()+"="+Features[i].toString()+"&");
+}
+}
+Http.open("GET", base);
 Http.send();
-
 Http.onreadystatechange = (e) => {
   console.log(Http.responseText)
+  var result = JSON.parse(Http.responseText)
+  document.getElementById("p1").innerHTML = "The Prediction is : "+result.predict;
+
 }
 
 }
@@ -150,12 +160,11 @@ Http.onreadystatechange = (e) => {
 </script>
 
 <br><br><br>
-<button onclick="Predict()">Predict</button>
+<button style="width:300px;height:80px;font-size:50px" onclick="Predict()">Predict</button>
 <br><br><br>
-<h2>LABEL<h2>
-<p>
-This is where the user can enter text...
-</p>
+<h2>The Result<h2>
+<p id="p1">
+The Prediction is :</p>
 
 </body>
 </html>
